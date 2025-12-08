@@ -1,0 +1,77 @@
+{
+  "name": "eva-terminal",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write .",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run format && npm run lint && npm run typecheck && npm run test && npm run test:e2e:smoke && npm run test:e2e",
+    "test:unit": "tsx --test tests/unit/projects-format.test.ts",
+    "db:seed": "tsx scripts/seed.ts",
+    "storage:check": "tsx scripts/storage-health-check.ts",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "test:e2e:smoke": "playwright test --grep smoke",
+    "test:e2e:ui": "playwright test --ui",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@mdx-js/mdx": "^3.1.1",
+    "@mdx-js/react": "^3.1.1",
+    "@supabase/ssr": "^0.7.0",
+    "@supabase/supabase-js": "^2.75.0",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.24",
+    "gray-matter": "^4.0.3",
+    "html2canvas": "^1.4.1",
+    "lru-cache": "^10.4.3",
+    "next": "^16.0.7",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "rehype-prism-plus": "^2.0.1",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "zod": "^4.1.13"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^15.5.6",
+    "@playwright/test": "^1.56.1",
+    "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.22",
+    "eslint": "^9",
+    "eslint-config-next": "^16.0.7",
+    "eslint-plugin-simple-import-sort": "^12.1.1",
+    "husky": "^9.1.7",
+    "jsdom": "^27.2.0",
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.6.2",
+    "tailwindcss": "^4",
+    "tsx": "^4.20.6",
+    "typescript": "^5",
+    "vitest": "^4.0.4"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npm run lint -- --fix",
+      "npm run format:fix --"
+    ],
+    "*.{md,mdx,json,css,scss}": [
+      "npm run format:fix --"
+    ]
+  }
+}

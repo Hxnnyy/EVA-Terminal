@@ -1,0 +1,134 @@
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(var(--space-3), 3vw, var(--space-8));
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid rgba(var(--accent-primary-rgb), 0.3);
+}
+
+.headerMatrix {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(var(--space-3), 2vw, var(--space-6));
+  max-width: clamp(460px, 42vw, 520px);
+  font-family: var(--font-mono);
+  color: rgba(var(--accent-secondary-rgb), 0.75);
+  text-transform: uppercase;
+}
+
+.headerMatrixItem {
+  display: grid;
+  gap: var(--space-2);
+  padding: 14px 18px;
+  text-align: center;
+  justify-items: center;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(var(--accent-secondary-rgb), 0.22);
+  background: rgba(10, 16, 40, 0.74);
+  box-shadow: inset 0 0 12px rgba(var(--accent-secondary-rgb), 0.2);
+  min-height: 90px;
+}
+
+.headerMatrixLabel {
+  font-size: var(--text-xs);
+  letter-spacing: 0.36em;
+  color: rgba(var(--accent-primary-rgb), 0.78);
+}
+
+.headerMatrixValue {
+  font-size: 0.92rem;
+  letter-spacing: 0.18em;
+  color: rgba(var(--accent-secondary-rgb), 0.94);
+}
+
+.headerMatrixDetail {
+  font-size: var(--text-xs);
+  letter-spacing: 0.32em;
+  color: rgba(var(--text-primary-rgb), 0.7);
+}
+
+.headerTitle {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+}
+
+.titleLabel {
+  font-size: clamp(0.95rem, 1.2vw, 1.1rem);
+  letter-spacing: 0.28em;
+  color: var(--text-primary);
+}
+
+.titleSubtitle {
+  font-size: clamp(0.72rem, 0.9vw, 0.82rem);
+  letter-spacing: 0.36em;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+}
+
+.headerStatus {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+}
+
+.statusLed {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  letter-spacing: 0.22em;
+  font-size: 0.76rem;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(var(--accent-secondary-rgb), 0.45);
+  color: rgba(var(--accent-secondary-rgb), 0.95);
+  box-shadow: 0 0 10px rgba(var(--accent-secondary-rgb), 0.35);
+  background: rgba(7, 16, 38, 0.7);
+  position: relative;
+}
+
+.statusLed::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 12px currentColor;
+}
+
+.statusLed[data-state='active'] {
+  border-color: rgba(var(--accent-primary-rgb), 0.55);
+  color: rgba(var(--accent-primary-rgb), 0.95);
+  box-shadow: 0 0 16px rgba(var(--accent-primary-rgb), 0.28);
+  animation: statusPulse 2.6s ease-in-out infinite;
+}
+
+.statusCode {
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
+  color: rgba(var(--accent-secondary-rgb), 0.74);
+}
+
+.statusMeta {
+  font-size: var(--text-xs);
+  letter-spacing: 0.32em;
+  color: rgba(var(--accent-primary-rgb), 0.55);
+}
+
+@media (max-width: 720px) {
+  .header {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .headerMatrix {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}

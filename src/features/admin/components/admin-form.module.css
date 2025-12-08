@@ -1,0 +1,57 @@
+.form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.split {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.error {
+  color: #fca5a5;
+}
+
+.hint {
+  color: rgba(240, 244, 255, 0.7);
+  font-size: 0.95rem;
+}
+
+.upload {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.twoCol {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.reel-file-input {
+  color: rgba(240, 244, 255, 0.7); /* hint tone, matches caption placeholder */
+  padding-left: 0.25rem;
+  letter-spacing: 0.01em;
+}
+
+.reel-file-input::-webkit-file-upload-button,
+.reel-file-input::file-selector-button {
+  margin-right: 1rem;
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(var(--text-primary-rgb), 0.14);
+  background: rgba(var(--surface-contrast-rgb), 0.75);
+  color: transparent; /* hide default label */
+  font-size: 0;
+  cursor: pointer;
+}
+
+.reel-file-input:disabled {
+  color: rgba(var(--text-primary-rgb), 0.45);
+}
+
+.reel-file-input:disabled::-webkit-file-upload-button,
+.reel-file-input:disabled::file-selector-button {
+  cursor: not-allowed;
+  opacity: 0.6;
+}

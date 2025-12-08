@@ -1,0 +1,32 @@
+export const INVESTMENTS_FALLBACK = [
+  {
+    id: 'fallback-aapl',
+    ticker: 'AAPL',
+    label: 'Apple Inc.',
+    order: 1,
+    provider: 'stooq',
+    providerSymbol: 'aapl.us',
+    perf6mPercent: 12.4,
+    perfLastFetched: new Date().toISOString(),
+  },
+  {
+    id: 'fallback-msft',
+    ticker: 'MSFT',
+    label: 'Microsoft',
+    order: 2,
+    provider: 'stooq',
+    providerSymbol: 'msft.us',
+    perf6mPercent: 8.1,
+    perfLastFetched: new Date().toISOString(),
+  },
+  {
+    id: 'fallback-nvda',
+    ticker: 'NVDA',
+    label: 'NVIDIA',
+    order: 3,
+    provider: 'stooq',
+    providerSymbol: 'nvda.us',
+    perf6mPercent: 34.2,
+    perfLastFetched: new Date().toISOString(),
+  },
+] as const;
