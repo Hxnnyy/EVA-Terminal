@@ -1299,10 +1299,25 @@ body[data-reduce-motion='true'] .theme-stage-ripple__cell {
   box-shadow: 0 30px 120px rgba(var(--surface-base-rgb), 0.4);
 }
 
+@media (max-width: 768px) {
+  .admin-shell {
+    grid-template-columns: 1fr;
+    margin: 0.5rem;
+    border-radius: 1.25rem;
+    min-height: auto;
+  }
+}
+
 .admin-shell__sidebar {
   background: var(--surface-contrast);
   color: var(--text-primary);
   padding: 2rem;
+}
+
+@media (max-width: 768px) {
+  .admin-shell__sidebar {
+    padding: 1rem 1.25rem;
+  }
 }
 
 .admin-shell__subtitle {
@@ -1313,6 +1328,12 @@ body[data-reduce-motion='true'] .theme-stage-ripple__cell {
   padding: 2rem;
   background: var(--surface-elevated);
   color: var(--text-primary);
+}
+
+@media (max-width: 768px) {
+  .admin-shell__main {
+    padding: 1rem;
+  }
 }
 
 .skip-link {
@@ -1349,6 +1370,14 @@ body[data-reduce-motion='true'] .theme-stage-ripple__cell {
   backdrop-filter: blur(24px);
   position: relative;
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .admin-dashboard {
+    margin: 0.75rem auto;
+    padding: 1rem;
+    border-radius: 1.25rem;
+  }
 }
 
 .admin-dashboard::before {
@@ -1396,6 +1425,13 @@ body[data-reduce-motion='true'] .theme-stage-ripple__cell {
   max-width: 900px;
 }
 
+@media (max-width: 768px) {
+  .admin-dashboard__grid {
+    margin: 1.25rem auto 0;
+    gap: 1rem;
+  }
+}
+
 .admin-card {
   background: rgba(var(--surface-elevated-rgb), 0.92);
   border: 1px solid rgba(var(--text-primary-rgb), 0.08);
@@ -1408,6 +1444,14 @@ body[data-reduce-motion='true'] .theme-stage-ripple__cell {
   min-height: 100%;
   position: relative;
   isolation: isolate;
+}
+
+@media (max-width: 768px) {
+  .admin-card {
+    padding: 1rem;
+    border-radius: 1rem;
+    gap: 1rem;
+  }
 }
 
 .admin-card__header {
@@ -1780,6 +1824,12 @@ body[data-reduce-motion='true'] .theme-stage-ripple__cell {
 
 .admin-form--investments {
   grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+@media (max-width: 768px) {
+  .admin-form--investments {
+    grid-template-columns: 1fr;
+  }
 }
 
 .admin-inline-info {

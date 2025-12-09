@@ -32,6 +32,12 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+@media (max-width: 768px) {
+  .twoCol {
+    grid-template-columns: 1fr;
+  }
+}
+
 .reel-file-input {
   color: rgba(240, 244, 255, 0.7);
   /* hint tone, matches caption placeholder */
