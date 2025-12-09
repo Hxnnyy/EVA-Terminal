@@ -23,7 +23,7 @@ export const buildReelLines = (items: ReelItem[]): Line[] => {
       { text: divider('='), kind: 'system' },
       { text: formatRow('VISUAL REEL // EVA TERMINAL'), kind: 'system' },
       { text: divider('-'), kind: 'system' },
-      { text: formatRow('No captures yet. Upload images via /admin.'), kind: 'muted' },
+      { text: formatRow('No captures yet. Check back soon!'), kind: 'muted' },
       { text: divider('='), kind: 'system' },
     ];
   }

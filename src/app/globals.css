@@ -1962,6 +1962,10 @@ body[data-reduce-motion='true'] .theme-stage-ripple__cell {
   color: var(--accent-pink);
 }
 
+.admin-form__success {
+  color: var(--accent-emerald);
+}
+
 .admin-upload {
   grid-column: 1 / -1;
   display: flex;
@@ -2000,6 +2004,32 @@ body[data-reduce-motion='true'] .theme-stage-ripple__cell {
 .admin-upload__filename {
   font-size: 0.95rem;
   color: rgba(var(--text-primary-rgb), 0.75);
+}
+
+.admin-upload__remove {
+  border: 1px solid rgba(var(--accent-pink-rgb), 0.6);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+  background: rgba(var(--accent-pink-rgb), 0.1);
+  color: var(--accent-pink);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.admin-upload__remove:hover:not(:disabled) {
+  background: rgba(var(--accent-pink-rgb), 0.2);
+  border-color: var(--accent-pink);
+  transform: translateY(-1px);
+}
+
+.admin-upload__remove:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @media (max-width: 640px) {

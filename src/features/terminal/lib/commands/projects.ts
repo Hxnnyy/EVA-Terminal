@@ -19,7 +19,7 @@ export const buildProjectsErrorLines = (message: string): Line[] => [
 
 const buildProjectsEmptyLines = (): Line[] => [
   {
-    text: 'No projects are available yet. Populate them via /admin.',
+    text: 'No projects are available yet. Check back soon!',
     kind: 'muted',
   },
 ];

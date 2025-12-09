@@ -33,12 +33,10 @@ export default async function ProjectsIndexPage({ searchParams }: ProjectsIndexP
   }
 
   return (
-    <div className="articles-shell__reader-surface">
-      <div className="articles-empty">
-        <p className="articles-placeholder__eyebrow">Projects</p>
-        <h1>Archive not yet initialized.</h1>
-        <p>Publish a project case study via the admin dashboard to activate this space.</p>
-      </div>
+    <div className="articles-empty">
+      <p className="articles-placeholder__eyebrow">Projects</p>
+      <h1>Archive not yet initialized.</h1>
+      <p>Publish a project case study via the admin dashboard to activate this space.</p>
     </div>
   );
 }

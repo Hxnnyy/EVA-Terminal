@@ -33,7 +33,7 @@ export const buildLinksSuccessLines = (links: LinkRecord[]): Line[] => {
   if (!links.length) {
     return [
       {
-        text: 'No outbound links are configured yet. Update them via /admin.',
+        text: 'No outbound links are configured yet. Check back soon!',
         kind: 'muted',
       },
     ];

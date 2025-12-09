@@ -45,7 +45,7 @@ export const buildWritingListLines = (entries: WritingSummary[]): Line[] => {
 
   if (!entries.length) {
     lines.push({
-      text: 'No published articles yet. Use /admin to publish your first entry.',
+      text: 'No published articles yet. Check back soon!',
       kind: 'muted',
     });
     return lines;

@@ -39,12 +39,13 @@ export function ProjectsManager({ initialProjects }: Props) {
     tags: '',
     fileName: '',
   });
-  const [status, setStatus] = useState<'idle' | 'saving'>('idle');
+  const [status, setStatus] = useState<'idle' | 'saving' | 'removing'>('idle');
   const [error, setError] = useState<string | null>(null);
   const [inlineErrors, setInlineErrors] = useState<string[]>([]);
   const [touched, setTouched] = useState(false);
   const [caseStudyFile, setCaseStudyFile] = useState<File | null>(null);
   const [lastMovedId, setLastMovedId] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   useEffect(() => {
     if (!touched) {
@@ -214,12 +215,27 @@ export function ProjectsManager({ initialProjects }: Props) {
   };
 
   const removeCaseStudy = async (projectId: string) => {
-    await adminFetchJson('/api/admin/projects/upload', {
-      method: 'DELETE',
-      body: { projectId, bucket: PROJECT_MDX_BUCKET },
-    });
-    setCaseStudyFile(null);
-    setForm((prev) => ({ ...prev, fileName: '' }));
+    setStatus('removing');
+    setError(null);
+    setInlineErrors([]);
+    setSuccessMessage(null);
+    try {
+      await adminFetchJson('/api/admin/projects/upload', {
+        method: 'DELETE',
+        body: { projectId, bucket: PROJECT_MDX_BUCKET },
+      });
+      setCaseStudyFile(null);
+      setForm((prev) => ({ ...prev, fileName: '' }));
+      // Show brief success message
+      setSuccessMessage('Case study removed successfully.');
+      window.setTimeout(() => setSuccessMessage(null), 2500);
+    } catch (err) {
+      const messages = resolveProjectError(err, 'Failed to remove case study.');
+      setError('Failed to remove case study.');
+      setInlineErrors(messages);
+    } finally {
+      setStatus('idle');
+    }
   };
 
   const moveProject = async (id: string, direction: 'up' | 'down') => {
@@ -428,11 +444,17 @@ export function ProjectsManager({ initialProjects }: Props) {
               type="button"
               className="admin-upload__remove"
               onClick={() => void removeCaseStudy(editingId)}
+              disabled={status === 'removing'}
             >
-              Remove case-study
+              {status === 'removing' ? 'Removing...' : 'Remove case-study'}
             </button>
           ) : null}
         </div>
+        {successMessage ? (
+          <div className="admin-inline-notice" role="status" aria-live="polite">
+            <p className={clsx('admin-form__success', formStyles.success)}>{successMessage}</p>
+          </div>
+        ) : null}
         {error || inlineErrors.length ? (
           <div className="admin-inline-notice" role="alert" aria-live="polite">
             {error ? <p className={clsx('admin-form__error', formStyles.error)}>{error}</p> : null}
