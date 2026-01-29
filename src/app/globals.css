@@ -2542,19 +2542,42 @@ body[data-reduce-motion='true'] .theme-stage-ripple__cell {
   box-shadow: 0 20px 45px rgba(3, 6, 30, 0.45);
 }
 
+.writing-article__content h1,
 .writing-article__content h2,
 .writing-article__content h3,
-.writing-article__content h4 {
+.writing-article__content h4,
+.writing-article__content h5,
+.writing-article__content h6 {
   font-weight: 600;
   margin: 1.5rem 0 0.5rem;
+  line-height: 1.25;
+}
+
+.writing-article__content h1 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
 }
 
 .writing-article__content h2 {
-  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  font-size: clamp(1.4rem, 2.6vw, 2.05rem);
 }
 
 .writing-article__content h3 {
-  font-size: clamp(1.2rem, 2.4vw, 1.6rem);
+  font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+}
+
+.writing-article__content h4 {
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+}
+
+.writing-article__content h5 {
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.writing-article__content h6 {
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
 }
 
 .writing-article__content ul,
