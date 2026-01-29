@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { requireAdminUser } from '@/lib/auth/admin';
+import { validateWritingMdx } from '@/lib/content/writing';
 import { validateJsonBody } from '@/lib/http/validation';
 import { AdminArticleSchema } from '@/lib/schemas';
 import { createRevalidateHelpers } from '@/lib/supabase/revalidate';
@@ -92,6 +93,21 @@ export async function PUT(request: Request, context: ArticleRouteContext) {
     if (!validation.ok) return validation.response;
 
     const parsed = validation.data;
+    if (parsed.body !== undefined) {
+      const mdxValidation = await validateWritingMdx(parsed.body, {
+        title: parsed.title ?? 'Untitled Article',
+        subtitle: parsed.subtitle ?? undefined,
+      });
+      if (!mdxValidation.ok) {
+        return NextResponse.json(
+          {
+            error: 'Invalid article body.',
+            details: mdxValidation.errors,
+          },
+          { status: 400, headers: NO_STORE_HEADERS },
+        );
+      }
+    }
     const supabase = await createSupabaseServerClient();
     const { revalidatePath } = createRevalidateHelpers(supabase);
     const adminGuard = await requireAdminUser(supabase);

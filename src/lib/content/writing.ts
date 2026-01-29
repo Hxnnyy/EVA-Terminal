@@ -1,11 +1,19 @@
 import matter from 'gray-matter';
 
 import { type WritingMeta, WritingMetaSchema } from '@/content/types';
+import { compileMdx } from '@/lib/mdx/compile';
 
 export type ParsedWritingMdx = {
   meta: WritingMeta;
   body: string;
 };
+
+export type WritingMdxValidation =
+  | { ok: true }
+  | {
+      ok: false;
+      errors: string[];
+    };
 
 export function parseWritingMdx(
   source: string,
@@ -42,4 +50,30 @@ export function parseWritingMdx(
     meta: parsed.data,
     body: content,
   };
+}
+
+export async function validateWritingMdx(
+  source: string,
+  fallbackMeta: Pick<WritingMeta, 'title'> & Partial<Omit<WritingMeta, 'title'>>,
+): Promise<WritingMdxValidation> {
+  try {
+    parseWritingMdx(source, fallbackMeta);
+  } catch (error) {
+    return { ok: false, errors: [normalizeMdxError(error)] };
+  }
+
+  try {
+    await compileMdx(source);
+  } catch (error) {
+    return { ok: false, errors: [`MDX syntax error: ${normalizeMdxError(error)}`] };
+  }
+
+  return { ok: true };
+}
+
+function normalizeMdxError(error: unknown) {
+  if (error instanceof Error && error.message) {
+    return error.message.replace(/\s+/g, ' ').trim();
+  }
+  return 'Invalid MDX content.';
 }

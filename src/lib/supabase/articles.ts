@@ -1,5 +1,6 @@
 import 'server-only';
 
+import matter from 'gray-matter';
 import { unstable_cache } from 'next/cache';
 
 import { type ParsedWritingMdx, parseWritingMdx } from '@/lib/content/writing';
@@ -125,11 +126,29 @@ function mapArticleSummary(
 }
 
 function mapArticleDetail(row: ArticleRow): ArticleDetail {
-  const parsed = parseWritingMdx(row.body_mdx, {
+  const fallbackMeta = {
     title: row.title,
     subtitle: row.subtitle ?? undefined,
     publishedAt: normalizeTimestamp(row.updated_at ?? row.created_at),
-  });
+  };
+  let parsed: ParsedWritingMdx;
+  try {
+    parsed = parseWritingMdx(row.body_mdx, fallbackMeta);
+  } catch (error) {
+    createLogger({ scope: 'supabase:articles' }).warn(
+      `Invalid writing frontmatter for article ${row.slug}. Falling back to stored metadata.`,
+      error,
+    );
+    const { content } = matter(row.body_mdx ?? '');
+    parsed = {
+      meta: {
+        title: fallbackMeta.title,
+        subtitle: fallbackMeta.subtitle,
+        publishedAt: fallbackMeta.publishedAt ?? null,
+      },
+      body: content,
+    };
+  }
 
   return {
     ...mapArticleSummary(row, {
